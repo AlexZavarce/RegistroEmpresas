@@ -20,6 +20,15 @@
       $query->free-result();
     } 
   }
+  public function obtenerEmpresa($usuario){
+        $sql= "SELECT * FROM empresa WHERE empresa.rif=? ";
+        $consulta=$this->db->query($sql,array($usuario));
+        if($consulta->num_rows() == 1){
+            return $consulta;
+        }else{
+            return false;
+        }   
+    }
   function buscaregistro(){
     $query = $this->db->query("SELECT registro.id as id,registro.nombre as nombre
     FROM registro");

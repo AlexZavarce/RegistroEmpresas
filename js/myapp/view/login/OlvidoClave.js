@@ -47,7 +47,7 @@ Ext.define('myapp.view.login.OlvidoClave', {
                             emptyText: 'Introduzca el RIF sin espacios',
                             maxLength: 25,
                             width: 285,
-                            labelWidth: 85,
+                            //labelWidth: 85,
                             allowBlank: false
                         }]
                 },

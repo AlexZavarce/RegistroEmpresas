@@ -52,19 +52,17 @@
                     },{
                        xtype: 'combobox',
                         width: 400,
-                        allowBlank: false,
                         fieldLabel: 'Municipio',
                         margins:'0 0 2 7',
                         name: 'cmbmunicipio',
                         allowBlank: false,
-                        valueField: 'id',
-                        forceSelection:true,
-                        displayField: 'nombre', 
                         store: Ext.create('myapp.store.registrar.Municipio'),
                         editable: false,  
                         queryMode: 'local',
+                        valueField: 'id',
+                        forceSelection:true,
+                        displayField: 'nombre', 
                         emptyText:'Seleccionar',
-                        triggerAction: 'all',
                         labelWidth: 115,  
                    },{
                         xtype: 'combobox',
@@ -97,7 +95,7 @@
                     forceSelection:true,
                     name: 'cmbcomunidad',
                     store: Ext.create('myapp.store.registrar.Comunidad'),  
-                    queryMode: 'remote',
+                    queryMode: 'local',
                     emptyText:'Seleccionar',
                 },{
                     xtype: 'container',
@@ -219,16 +217,16 @@
                         margins     : '5 0 0 7',
                         labelWidth  : 60,
                         name        :'facebookemp',
-                        vtype       :'facebook',
+                       
                         allowBlank  : false,
                     },{
                         xtype       : 'textfield',
-                        fieldLabel  : 'Twitter',
+                        fieldLabel  : 'Twittesadasdr',
                         width       : 805,
                         margins     : '5 0 0 7',
                         labelWidth  : 80,
                         name        :'twitteremp',
-                        vtype       :'twitter',
+                      
                         allowBlank  : false,
                     }],
                 }]

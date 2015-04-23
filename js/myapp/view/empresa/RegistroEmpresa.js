@@ -29,7 +29,7 @@ Ext.define('myapp.view.empresa.RegistroEmpresa', {
                 margin:'10 10 0 10',
                 width:'100%',
                 flex:1,
-                itemId :'containerCorrrespondencia',
+                itemId :'datos empresa',
                 title: 'Selección del Tipo de Documento',
                 items: [{
                     xtype: 'textfield',
@@ -46,23 +46,23 @@ Ext.define('myapp.view.empresa.RegistroEmpresa', {
                     layout: 'hbox',
                     items: [{
                         xtype: 'combobox',
-                        editable: false,  
+                       // editable: false,  
                         name: 'rif',
-                        editable: false, 
+                        //editable: false, 
                         fieldLabel: 'R.I.F', 
                         labelWidth: 60,
                         width: 130,
-                        value:'V',
+                        //value:'V',
                         //margins:'10 5 5 0',
-                        selecOnFocus: true,
+                        //selecOnFocus: true,
                         store: Ext.create('myapp.store.Nacionalidad'),
                         valueField: 'nombre',
                         displayField: 'nombre', 
-                        queryMode: 'local',
-                        allowBlank: false, 
-                        forceSelection: true,
-                        triggerAction: 'all',           
-                        editable:false
+                       // queryMode: 'local',
+                       // allowBlank: false, 
+                        //forceSelection: true,
+                        //triggerAction: 'all',           
+                        //editable:false
                     },{
                         xtype: 'textfield',
                         labelWidth: 100,
@@ -72,7 +72,7 @@ Ext.define('myapp.view.empresa.RegistroEmpresa', {
                         width:100,
                         minLength:6,
                         maxLength:8,
-                        allowBlank: false
+                        //allowBlank: false
                     },{
                         xtype: 'textfield',
                         labelWidth: 50,
@@ -105,8 +105,8 @@ Ext.define('myapp.view.empresa.RegistroEmpresa', {
                     items: [{
                         xtype: 'combobox',
                         name: 'registromer',
-                         valueField: 'id',
-                        forceSelection:true,
+                        valueField: 'id',
+                        //forceSelection:true,
                         displayField: 'nombre', 
                         store: Ext.create('myapp.store.empresa.Registro'),
                         width:270,

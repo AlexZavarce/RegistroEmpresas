@@ -66,7 +66,6 @@ class Empresa extends CI_Controller {
       }else{
         $seleccioncamara4=0;
       };
-
     $empresa=array(
       'id'              => $this->input->post('id'),
       'rif'             => $this->input->post('rif'). $this->input->post('rif1').$this->input->post('rif2'),
@@ -74,14 +73,15 @@ class Empresa extends CI_Controller {
       'anoact'          =>$this->input->post('anoact'),
       'registromer'     =>$this->input->post('registromer'),
       'razonsoc'        =>$this->input->post('razonsoc'),
-      'nacionalidarep'  =>'V',
-      'cedularep'       =>$this->input->post('cedula'),
+      'nacionalidarep'  =>$this->input->post('nacionalidadrep'),
+      'cedularep'       =>$this->input->post('cedularep'),
       'nombrerep'       =>$this->input->post('representante'),
       'telfrep'        =>$this->input->post('codmovilrep').$this->input->post('movilrep'),
       'tipo'            =>$this->input->post('tipo'),
       'nombrecont'      =>$this->input->post('nombrecont'),
-      'telfcont'        =>$this->input->post('codmovil').$this->input->post('movil'),
-      'cedulacont'      =>$this->input->post('cedulacont'),
+      'telfcont'        =>$this->input->post('codmovilcont').$this->input->post('movilcont'),
+      'nacionalidadcont' =>$this->input->post('nacionalidadcont'),
+      'cedulacont'       =>$this->input->post('cedulacont'),
       'estado'          =>$this->input->post('cmbestado'),
       'municipio'       =>$this->input->post('cmbmunicipio'),
       'parroquia'       =>$this->input->post('cmbparroquia'),
@@ -120,4 +120,75 @@ class Empresa extends CI_Controller {
 
     }
   }
+   public function obtenerEmpresa(){
+        $username = $this->session->userdata('datasession');
+        if($username['login_ok']==TRUE){
+            $usuario = $username['usuario'];
+            //$nacionalidad =$username['nacionalidad']; 
+        }else{
+            //$usuario= $this->input->get("cedula");
+            //$nacionalidad= $this->input->get("nacionalidad");
+        }
+        $empresa=$this->empresa_model->obtenerEmpresa($usuario);
+        if($empresa!=false){
+            if($username['login_ok']==TRUE){
+                foreach ($empresa->result_array() as $row){
+                  $data[] =array(
+                  'id'              =>$row['id'],
+                  'rif'             =>SUBSTR($row['rif'],0,1),
+                  'rif1'            =>SUBSTR($row['rif'],1,strlen($row['rif'])-2),
+                  'rif2'            =>$row['rif'][strlen($row['rif'])-1],
+                  'nombrecomer'     =>$row['nombreco'],
+                  'anoact'          =>$row['anoact'],
+                  'registromer'     =>$row['registromer'],
+                  'razonsoc'        =>$row['razonsoc'],
+                  'nacionalidadrep'  =>$row['nacionalidarep'],
+                  'cedularep'       =>$row['cedularep'],
+                  'representante'   =>$row['nombrerep'],
+                  'codmovilrep'     => SUBSTR($row['telfrep'],0,3),
+                  'movilrep'        => SUBSTR($row['telfrep'],3),
+                  'tipo'            =>$row['tipo'],
+                  'nombrecont'      =>$row['nombrecont'],
+                  'codmovilcont'    => SUBSTR($row['telfcont'],0,3),
+                  'movilcont'       => SUBSTR($row['telfcont'],3),
+                  'nacionalidadcont'=>$row['nacionalidadcont'],
+                  'cedulacont'      =>$row['cedulacont'],
+                  'cmbestado'       =>$row['estado'],
+                  'cmbmunicipio'    =>$row['municipio'],
+                  'cmbparroquia'    =>$row['parroquia'],
+                  'cmbcomunidad'    =>$row['comunidad'],
+                  'direccion'       =>$row['direccion'],
+                  'codmovilemp'     => SUBSTR($row['tlfmovil'],0,3),
+                  'movilemp'        => SUBSTR($row['tlfmovil'],3),
+                  'codfijoemp'      => SUBSTR($row['tlflocal'],0,3),
+                  'fijoemp'         => SUBSTR($row['tlflocal'],3),
+                  'codfaxemp'       => SUBSTR($row['faxemp'],0,3),
+                  'faxemp'          => SUBSTR($row['faxemp'],3),
+                  'correoemp'       =>$row['emailemp'],
+                  'pagwebemp'       =>$row['pagwebemp'],
+                  'facebookemp'     =>$row['facebemp'],
+                  'twitteremp'      =>$row['twitter'],
+                  'seleccioncamara1' =>$row['selecamara1'],
+                  'seleccioncamara2'     =>$row['selecamara2'],
+                  'seleccioncamara3'     =>$row['selecamara3'],
+                  'seleccioncamara4'     =>$row['selecamara4'],
+                  'cmbseccion'      =>$row['seccion'],
+                  'cmbdivisionact'  =>$row['divisionact'],
+                  'cmbgrupo'        =>$row['grupoact'],
+                  'cmbclase'        =>$row['claseact'],
+                  'total'            =>1
+                  );
+                }
+            }
+        }else{
+            $data[] = array(
+                'total'  =>0
+            );
+        }
+        $output = array(
+            'success' => true,
+            'data'    => $data,
+            'total'   => count($data));
+        echo json_encode($output);
+    }
 }

@@ -24,6 +24,9 @@ Ext.define('myapp.controller.empresa.RegistroEmpresa', {
             "tabregistro1 combobox[name=cmbmunicipio]": {
             select: this.seleccionMunicipio
             },
+            "registroempresa":{
+            render:this.renderPanelempresa
+            }, 
             "tabregistro1 combobox[name=cmbparroquia]": {
             select: this.seleccionParroquia
             },
@@ -41,6 +44,32 @@ Ext.define('myapp.controller.empresa.RegistroEmpresa', {
             },
         });
     },
+    renderPanelempresa: function(){
+    this.getRegistroEmpresa().getForm().reset();
+    formulario=this.getRegistroEmpresa();
+    empresaStore = Ext.create('myapp.store.empresa.EmpresaStore');
+    empresaStore.load(function(records,operation,success){
+         console.log(records);
+    empresaStore.each(function (record){
+    if(record.get('total')==1){
+        console.log(record);
+      formulario.getForm().loadRecord(record);
+      // nacionalidadStore = formulario.down("combobox[name=rif]").getStore();
+     // nacionalidadStore.proxy.extraParams.rif=record.get('rif');
+      // nacionalidadStore.load();
+      // registromerStore = formulario.down("combobox[name=registromer]").getStore();
+      // registromerStore.proxy.extraParams.registromer=record.get('registromer');
+      // registromerStore.load();
+      // municipioStore = formulario.down("combobox[name=cmbmunicipio]").getStore();
+      // municipioStore.proxy.extraParams.estado=record.get('cmbestado');
+      // municipioStore.load();
+      // parroquiaStore = formulario.down("combobox[name=cmbparroquia]").getStore();
+     
+
+        }
+      })
+    })
+  },
     onButtonClickSave: function(button, e, options) {
     var formPanel = button.up('form'); 
     var form = this.getRegistroEmpresa();
@@ -57,14 +86,17 @@ Ext.define('myapp.controller.empresa.RegistroEmpresa', {
     var registromer = form.down("textfield[name=registromer]").getValue();
     var razonsoc = form.down("textfield[name=razonsoc]").getValue();
     var tipo = form.down("combobox[name=tipo]").getValue();
-    var cedula = tab3.down("textfield[name=cedula]").getValue();
+    var nacionalidadrep = tab3.down("textfield[name=nacionalidadrep]").getValue();
+    var cedularep = tab3.down("textfield[name=cedularep]").getValue();
     var representante =tab3.down("textfield[name=representante]").getValue();
     var codmovilrep =tab3.down("combobox[name=codmovilrep]").getValue();
     var movilrep = tab3.down("textfield[name=movilrep]").getValue();
     var nombrecont=tab3.down("textfield[name=nombrecont]").getValue();
-    var codmovil =tab3.down("combobox[name=codmovil]").getValue();
-    var movil = tab3.down("textfield[name=movil]").getValue();
+    
+    //var codmovil =tab1.down("combobox[name=codmovil]").getValue();
+    // var movil = tab1.down("textfield[name=movil]").getValue();
     var cedulacont = tab3.down("textfield[name=cedulacont]").getValue();
+    var nacionalidadcont = tab3.down("textfield[name=nacionalidadcont]").getValue();
     var cmbestado = tab1.down("combobox[name=cmbestado]").getValue();
     var cmbmunicipio = tab1.down("combobox[name=cmbmunicipio]").getValue();
     var cmbparroquia = tab1.down("combobox[name=cmbparroquia]").getValue();
@@ -100,15 +132,18 @@ Ext.define('myapp.controller.empresa.RegistroEmpresa', {
         anoact:anoact,
         registromer:registromer,
         razonsoc:razonsoc,
-        cedula:cedula,
+        nacionalidadrep:nacionalidadrep,
+        cedularep:cedularep,
         representante:representante,
         codmovilrep:codmovilrep,
         movilrep:movilrep,
         tipo:tipo,
         nombrecon:nombrecont,
-        codmovil:codmovil,
-        movil:movil,
-        correocont:correocont,
+       // codmovil:codmovil,
+        //movil:movil,
+        nacionalidadcont:nacionalidadcont,
+        cedulacont:cedulacont,
+        representante:representante,
         cmbestado:cmbestado,
         cmbmunicipio:cmbmunicipio,
         cmbparroquia:cmbparroquia,

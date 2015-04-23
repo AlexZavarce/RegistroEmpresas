@@ -6,11 +6,9 @@ Ext.application({
 	controllers	: [
 		'myapp.controller.Menu',
 		'myapp.controller.login.Login',
-		//'myapp.controller.registro.Asistencia',
+		'myapp.controller.empresa.RegistroEmpresa',
 		//'myapp.controller.registro.Retiro',
-		'myapp.controller.reportes.Criseleccion',
-		'myapp.controller.reportes.Criinfempresa',
-		'myapp.controller.seguridad.Contrasena',
+		
 		//'myapp.controller.empresa.TabOficioController',
 		//'myapp.controller.empresa.TabActoAdministrativoController',
 		//'myapp.controller.registrar.TabSolicitudAyudaController'
