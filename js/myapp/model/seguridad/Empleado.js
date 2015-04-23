@@ -1,0 +1,31 @@
+Ext.define('myapp.model.seguridad.Empleado', { 
+   extend: 'Ext.data.Model',
+    idProperty: 'id',
+    fields: [    
+        { name: 'id' }, 
+        { name: 'nombres' },
+        { name: 'apellido' },
+        { name: 'cedula' },
+        { name: 'nacionalidad' },
+        { name: 'estatus' },
+        { name: 'division' },
+        { name: 'divisionnombre' },
+        { name: 'horario' },
+        { name: 'tiponomina' },
+        { name: 'cargo' },
+        { name: 'foto'},
+        { name: 'fechaingreso' },
+        { name: 'fechanac' },
+        { name: 'sexo' },
+        { name: 'edocivil' },
+        { name: 'correo' },
+        { name: 'direccion' },
+        { name: 'movil' },
+        { name: 'fijo' },
+        { name: 'codfijo' },
+        { name: 'codmovil'},
+        { name: 'hijos' },
+        { name: 'canthijos' },
+        { name: 'profesion'}
+    ] 
+});
