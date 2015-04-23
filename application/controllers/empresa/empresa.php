@@ -95,9 +95,9 @@ class Empresa extends CI_Controller {
             'parroquia' => $this->input->post('cmbparroquia'),
             'comunidad' => $this->input->post('cmbcomunidad'),
             'direccion' => $this->input->post('direccion'),
-            'tlfmovil' => $this->input->post('codmovilemp') . $this->input->post('movilemp'),
-            'tlflocal' => $this->input->post('codfijoemp') . $this->input->post('fijoemp'),
-            'faxemp' => $this->input->post('codfaxemp') . $this->input->post('faxemp'),
+            'tlfmovil' => $this->input->post('codmovilemp').$this->input->post('movilemp'),
+            'tlflocal' => $this->input->post('codfijoemp').$this->input->post('fijoemp'),
+            'faxemp' => $this->input->post('codfaxemp').$this->input->post('faxemp'),
             'emailemp' => $this->input->post('correoemp'),
             'pagwebemp' => $this->input->post('pagwebemp'),
             'facebemp' => $this->input->post('facebookemp'),
@@ -126,7 +126,7 @@ class Empresa extends CI_Controller {
                 ));
             }
         } else {
-            $result3 = actualizarempresa($empresa['rif'], $empresa);
+            $result3 = $this->empresa_model->actualizarempresa($empresa['rif'], $empresa);
             if ($result3) {
                 echo json_encode(array(
                     "success" => true,

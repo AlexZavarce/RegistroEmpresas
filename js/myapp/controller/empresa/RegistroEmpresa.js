@@ -152,6 +152,7 @@ Ext.define('myapp.controller.empresa.RegistroEmpresa', {
                 codmovilemp: codmovilemp,
                 movilemp: movilemp,
                 codfijoemp: codfijoemp,
+                fijoemp: fijoemp,
                 codfaxemp: codfaxemp,
                 faxemp: faxemp,
                 correoemp: correoemp,
@@ -179,8 +180,8 @@ Ext.define('myapp.controller.empresa.RegistroEmpresa', {
                 var result = Ext.JSON.decode(conn.responseText, true);
                 if (result.success) {
                     Ext.Msg.alert('Exito', result.msg);
-                    form.close();
-                    win.close();
+                    //form.close();
+                    //win.close();
                     grid.getView().refresh(true);
                     grid.getStore().load();
                 } else {
