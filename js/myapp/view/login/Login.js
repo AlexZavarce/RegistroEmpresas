@@ -101,7 +101,7 @@ Ext.define('myapp.view.login.Login', {
                 }, {
                     inputType: 'password',
                     name: 'password',
-                    maxLength: 15,
+                    maxLength: 300,
                     labelWidth: 85,
                     name: 'password',
                             fieldLabel: "Contraseña",

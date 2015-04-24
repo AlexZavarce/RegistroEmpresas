@@ -60,7 +60,7 @@ class Usuario extends CI_Controller {
         for($i=0;$i<12;$i++) {
             $cad .= substr($str,rand(0,62),1);
         }
-
+        $cad2=$cad;
         $cad = md5(strtoupper($cad));
 
         if(isset($add)){
@@ -70,7 +70,7 @@ class Usuario extends CI_Controller {
                     'id'              => $this->input->post('id'),
                     'nacionalidad'    =>$record->nacionalidad,
                     'cedula'          => $record->cedula,
-                    'usuario'         => $record->rif.$record->rif1.$record->rif2,
+                    'usuario'         => $record->rif,
                     'password'        => $cad,
                     'status'          =>1,
                     'tipousuario'     =>4
@@ -95,11 +95,11 @@ class Usuario extends CI_Controller {
                 );
                 $cedula= $record->cedula;
                 $correo=$record->correo;
-                $usuario=$record->rif.$record->rif1.$record->rif2;
+                $usuario=$record->rif;
                 $result2=$this->usuario_model->insertpersona($datapersona);
                 $result3=$this->usuario_model->insertusuario($datausuario);
                 $result=$this->usuario_model->updateusuariolinea($cedula);
-                $this->Enviarclave($cedula,$correo,$cad,$usuario);
+                $this->Enviarclave($cedula,$correo,$cad2,$usuario);
 
             }
             if(mysql_affected_rows()>0){
@@ -111,7 +111,7 @@ class Usuario extends CI_Controller {
             }
         }
     }
-    public function Enviarclave($cedula,$correo,$cad){
+    public function Enviarclave($cedula,$correo,$cad,$usuario){
      
       $this->load->library('email','','correo');
       $configGmail = array(
