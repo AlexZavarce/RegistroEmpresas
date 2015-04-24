@@ -49,6 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
+//$db['default']['username'] = 'registroempresa';
+//$db['default']['password'] = 'Mysql>r3g1str03mpr3s4#';
+//$db['default']['database'] = 'registroempresa';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '123';
 $db['default']['database'] = 'empresas2';

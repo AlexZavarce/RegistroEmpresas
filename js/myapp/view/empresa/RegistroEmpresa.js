@@ -10,7 +10,7 @@ Ext.define('myapp.view.empresa.RegistroEmpresa', {
     ],
     height:'100%',
     width:'100%',
-    title : 'Registro de Correspondencia',
+    title : 'Registro de Empresa',
     initComponent: function() {
         var me   = this;
         me.items = me.buildItems();

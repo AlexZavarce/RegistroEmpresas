@@ -113,6 +113,10 @@ class Empresa extends CI_Controller {
         );
 
         if ($id == null) {
+            $empresa += array(
+                'fecharegistro'=>date("Y-m-d"),
+                'fechamodificacion'=>date("Y-m-d")
+            );
             $result2 = $this->empresa_model->insertarempresa($empresa);
             if ($result2) {
                 echo json_encode(array(
@@ -126,6 +130,10 @@ class Empresa extends CI_Controller {
                 ));
             }
         } else {
+            $empresa += array(
+                
+                'fechamodificacion'=>date("Y-m-d")
+            );
             $result3 = $this->empresa_model->actualizarempresa($empresa['rif'], $empresa);
             if ($result3) {
                 echo json_encode(array(

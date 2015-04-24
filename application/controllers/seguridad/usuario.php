@@ -118,8 +118,8 @@ class Usuario extends CI_Controller {
           'protocol' => 'smtp',
           'smtp_host' => 'ssl://smtp.gmail.com',
           'smtp_port' => 465,
-          'smtp_user' => 'pinedaisa@gmail.com',
-          'smtp_pass' => 'jinisa2015',
+          'smtp_user' => 'validacionregistrolae@gmail.com',
+          'smtp_pass' => 'vlcr457g.h',
           'mailtype' => 'html',
           'charset' => 'utf-8',
           'newline' => "\r\n" 
