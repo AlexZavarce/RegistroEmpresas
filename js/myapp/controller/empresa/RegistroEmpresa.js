@@ -52,8 +52,12 @@ Ext.define('myapp.controller.empresa.RegistroEmpresa', {
 
             empresaStore.each(function (record) {
                 if (record.get('total') == 1) {
-
+                    formulario.down("combobox[name=rif]").setReadOnly(true);
+                    formulario.down("textfield[name=rif1]").setReadOnly(true);
+                    formulario.down("textfield[name=rif2]").setReadOnly(true);
+                    formulario.down("textarea[name=razonsoc]").setReadOnly(true);
                     formulario.getForm().loadRecord(record);
+                    
                     // nacionalidadStore = formulario.down("combobox[name=rif]").getStore();
                     // nacionalidadStore.proxy.extraParams.rif=record.get('rif');
                     // nacionalidadStore.load();
@@ -144,7 +148,7 @@ Ext.define('myapp.controller.empresa.RegistroEmpresa', {
                 nacionalidadcont: nacionalidadcont,
                 cedulacont: cedulacont,
                 representante:representante,
-                cmbestado: cmbestado,
+                        cmbestado: cmbestado,
                 cmbmunicipio: cmbmunicipio,
                 cmbparroquia: cmbparroquia,
                 cmbcomunidad: cmbcomunidad,

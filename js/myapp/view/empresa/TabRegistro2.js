@@ -30,6 +30,7 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                         type: 'hbox',
                         width: '100%',
                         margin: '10 10 10 10',
+                        style: 'padding:10px',
                         title: 'Camaras del Estado Lara',
                         items: [{
                                 xtype: 'container',
@@ -40,8 +41,6 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                                         layout: 'hbox',
                                         align: 'center',
                                         name: 'rdselfoto',
-                                        //allowBlank:false,
-
                                         width: '100%',
                                         pack: 'center',
                                         columns: 2,
@@ -84,6 +83,7 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                         type: 'hbox',
                         width: '100%',
                         margin: '10 10 10 10',
+                        style: 'padding:10px',
                         title: 'Ubique la Empresa en el Clasificador Venezolano de Actividades Económicas',
                         items: [{
                                 xtype: 'container',
@@ -92,9 +92,9 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                                 items: [
                                     {
                                         xtype: 'combobox',
-                                        width: 410,
+                                         width: '49%',
                                         allowBlank: false,
-                                        fieldLabel: 'Seccion',
+                                        fieldLabel: '* Seccion',
                                         margins: '0 0 2 7',
                                         name: 'cmbseccion',
                                         displayField: 'nombre',
@@ -103,13 +103,14 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                                         queryMode: 'local',
                                         emptyText: 'Seleccionar',
                                         triggerAction: 'all',
+                                        allowBlank: false,
                                         labelWidth: 115
                                     },
                                     {
                                         xtype: 'combobox',
-                                        width: 620,
+                                         width: '49%',
                                         allowBlank: false,
-                                        fieldLabel: 'Division',
+                                        fieldLabel: '* Division',
                                         margins: '0 0 2 7',
                                         name: 'cmbdivisionact',
                                         displayField: 'nombre',
@@ -118,6 +119,7 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                                         queryMode: 'local',
                                         emptyText: 'Seleccionar',
                                         triggerAction: 'all',
+                                        allowBlank: false,
                                         labelWidth: 115
                                     }]
                             }, {
@@ -125,9 +127,9 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                                 layout: 'hbox',
                                 items: [{
                                         xtype: 'combobox',
-                                        width: 410,
+                                         width: '49%',
                                         allowBlank: false,
-                                        fieldLabel: 'Grupo',
+                                        fieldLabel: '* Grupo',
                                         margins: '0 0 2 7',
                                         name: 'cmbgrupo',
                                         displayField: 'nombre',
@@ -136,12 +138,13 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                                         queryMode: 'local',
                                         emptyText: 'Seleccionar',
                                         triggerAction: 'all',
+                                        allowBlank: false,
                                         labelWidth: 115
                                     }, {
                                         xtype: 'combobox',
-                                        width: 620,
+                                         width: '49%',
                                         allowBlank: false,
-                                        fieldLabel: 'Clase',
+                                        fieldLabel: '* Clase',
                                         margins: '0 0 2 7',
                                         name: 'cmbclase',
                                         displayField: 'nombre',
@@ -150,6 +153,7 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                                         queryMode: 'local',
                                         emptyText: 'Seleccionar',
                                         triggerAction: 'all',
+                                        allowBlank: false,
                                         labelWidth: 115
                                     }]
                             }]

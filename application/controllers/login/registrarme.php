@@ -46,7 +46,7 @@ class Registrarme extends CI_Controller {
             $nombreemp=$dataempleado['nombre'];
             $apellidoemp=$dataempleado['apellido'];
             $correoemp=$dataempleado['correo']; 
-            $this->Enviarcorreo($nombreemp,$apellidoemp,$correoemp,$rif);
+            $this->Enviarcorreo($nombreemp,$apellidoemp,$correoemp,$rif,$razonsocial);
             }  
             $this->output->set_output(json_encode(array(
             'success' => true,
@@ -75,17 +75,17 @@ class Registrarme extends CI_Controller {
             $nombreemp=$dataempleado['nombre'];
             $apellidoemp=$dataempleado['apellido'];
             $correoemp=$dataempleado['correo']; 
-            $this->Enviarcorreo($nombreemp,$apellidoemp,$correoemp,$rif);
+            $this->Enviarcorreo($nombreemp,$apellidoemp,$correoemp,$rif,$razonsocial);
           }  
           $this->output->set_output(json_encode(array(
             'success' => true,
-            'msg'   => 'Empleado Guardado Exitosamente,Se enviara un correo en las proximas horas'
+            'msg'   => 'Transacción Exitosa,Se enviara un correo en las proximas horas'
            
           )));
         } 
     }
   }
-  public function Enviarcorreo($nombreemp,$apellidoemp,$correoemp,$rif){
+  public function Enviarcorreo($nombreemp,$apellidoemp,$correoemp,$rif,$razonsocial){
      
       $this->load->library('email','','correo');
       $configGmail = array(
@@ -107,6 +107,8 @@ class Registrarme extends CI_Controller {
      <p> El siguiente correo es para notificar que un usuario quiere registrar su empresa en el sistema.Por favor revisar el siguiente RIF: </p>
     <p><b>RIF:</b></p>
     <p><b>'.$rif.'&nbsp;</b></p>
+    <p><b>Razon Social:</b></p>
+    <p><b>'.$razonsocial.'&nbsp;</b></p>
     <p></p>
     <p><b>Sistema de Registro de Empresas Manufatureras</b></p>
     <p><b>Lara... Tierra Progresista</b></p>');

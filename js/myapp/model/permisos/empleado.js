@@ -3,9 +3,9 @@ Ext.define('myapp.model.permisos.Empleado', {
     fields: [ 
 	    { name: 'id' },    
 	    { name:'nombre' },
-	    { name:'apellido' }
+	    { name:'apellido' },
 	    { name: 'cedula' },
 	    { name: 'foto' },
-	    { name: 'fechaingreso' },
+	    { name: 'fechaingreso' }
     ] 
 });
