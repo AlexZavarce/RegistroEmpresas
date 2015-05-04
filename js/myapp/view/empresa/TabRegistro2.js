@@ -74,8 +74,32 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                                                 inputValue: '5',
                                                 margins: '0 0 0 50',
                                                 //checked:false
-                                            }],
+                                            }, {
+                                                xtype: 'checkboxfield',
+                                                name: 'seleccioncamara5',
+                                                boxLabel: 'Otra',
+                                                style: 'margin-bottom: 30px',
+                                                inputValue: '5',
+                                                margins: '0 0 0 50',
+                                                //checked:false
+                                            }
+
+                                            ],
                                     }],
+                            },{
+                                xtype       : 'button',
+                                width       :  40,
+                                iconCls     : 'pdf32',
+                                iconAlign   : 'right',
+                                name        : 'pdfClasificador',
+                                tooltip     : 'Clasificador de Empresa',
+                                scale       : 'large',
+                                fieldLabel:'Clasificador',
+                                margin: '0 10 10 50',
+                            },{
+                                xtype: 'label',
+                                style: 'align:left',
+                                text: 'Clasificador Venezolano de Actividades Económicas CAEV',
                             }]
                     }, {
                         xtype: 'fieldset',
@@ -103,6 +127,7 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                                         queryMode: 'local',
                                         emptyText: 'Seleccionar',
                                         triggerAction: 'all',
+                                        editable: false,
                                         allowBlank: false,
                                         labelWidth: 115
                                     },
@@ -119,8 +144,10 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                                         queryMode: 'local',
                                         emptyText: 'Seleccionar',
                                         triggerAction: 'all',
+                                        editable: false,
                                         allowBlank: false,
-                                        labelWidth: 115
+                                        labelWidth: 115,
+                                        disabled:true,
                                     }]
                             }, {
                                 xtype: 'container',
@@ -138,8 +165,10 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                                         queryMode: 'local',
                                         emptyText: 'Seleccionar',
                                         triggerAction: 'all',
+                                        editable: false,
                                         allowBlank: false,
-                                        labelWidth: 115
+                                        labelWidth: 115,
+                                        disabled:true,
                                     }, {
                                         xtype: 'combobox',
                                          width: '49%',
@@ -153,8 +182,31 @@ Ext.define('myapp.view.empresa.TabRegistro2', {
                                         queryMode: 'local',
                                         emptyText: 'Seleccionar',
                                         triggerAction: 'all',
+                                        editable: false,
                                         allowBlank: false,
-                                        labelWidth: 115
+                                        labelWidth: 115,
+                                        disabled:true,
+                                    }]
+                            },{
+                                xtype: 'container',
+                                layout: 'hbox',
+                                items: [{
+                                        xtype: 'combobox',
+                                         width: '49%',
+                                        allowBlank: false,
+                                         fieldLabel: '* Rama',
+                                        margins: '0 0 2 7',
+                                        name: 'cmbrama',
+                                        displayField: 'nombre',
+                                        valueField: 'id',
+                                        store: Ext.create('myapp.store.empresa.Rama'),
+                                        queryMode: 'local',
+                                        editable: false,
+                                        emptyText: 'Seleccionar',
+                                        triggerAction: 'all',
+                                        allowBlank: false,
+                                        labelWidth: 115,
+                                        disabled:true,
                                     }]
                             }]
 

@@ -47,6 +47,15 @@ class Empresa extends CI_Controller {
                 'data' => $resultdbd)));
         }
     }
+     public function Obtenerempresagrid(){
+        $resultdbd=array();  
+        if ($resultdbd=$this->empresa_model->Obtenerempresagrid()){
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(array(
+            "success" => True,
+            'data' => $resultdbd)));
+        }
+     }
 
     public function guardarempresa() {
         $empresa = array();
@@ -74,8 +83,13 @@ class Empresa extends CI_Controller {
         } else {
             $seleccioncamara4 = 0;
         };
+         if ($this->input->post('seleccioncamara5') == 'true') {
+            $seleccioncamara5 = 1;
+        } else {
+            $seleccioncamara5 = 0;
+        };
         $empresa = array(
-            'id' => $this->input->post('id'),
+           
             'rif' => $this->input->post('rif') . $this->input->post('rif1') . $this->input->post('rif2'),
             'nombreco' => $this->input->post('nombrecomer'),
             'anoact' => $this->input->post('anoact'),
@@ -106,10 +120,12 @@ class Empresa extends CI_Controller {
             'selecamara2' => $seleccioncamara2,
             'selecamara3' => $seleccioncamara3,
             'selecamara4' => $seleccioncamara4,
+            'selecamara5' => $seleccioncamara5,
             'seccion' => $this->input->post('cmbseccion'),
             'divisionact' => $this->input->post('cmbdivision'),
             'grupoact' => $this->input->post('cmbgrupo'),
             'claseact' => $this->input->post('cmbclase'),
+            'ramaact' => $this->input->post('cmbrama'),
         );
 
         if ($id == null) {
@@ -131,36 +147,28 @@ class Empresa extends CI_Controller {
             }
         } else {
             $empresa += array(
-                
+                'id'=>$id,
                 'fechamodificacion'=>date("Y-m-d")
             );
             $result3 = $this->empresa_model->actualizarempresa($empresa['rif'], $empresa);
             if ($result3) {
                 echo json_encode(array(
                     "success" => true,
-                    "msg" => "Se Aptualizo con Éxito." //modificado en la base de datos
+                    "msg" => "Se Actualizo con Éxito." //modificado en la base de datos
                 ));
             } else {
                 echo json_encode(array(
                     "success" => false,
-                    "msg" => "No se puedo Aptualizar." //no se modifico en la base de datos
+                    "msg" => "No se puedo Actualizar." //no se modifico en la base de datos
                 ));
             }
         }
     }
-
-    public function obtenerEmpresa() {
-        $username = $this->session->userdata('datasession');
-        if ($username['login_ok'] == TRUE) {
-            $usuario = $username['usuario'];
-            //$nacionalidad =$username['nacionalidad']; 
-        } else {
-            //$usuario= $this->input->get("cedula");
-            //$nacionalidad= $this->input->get("nacionalidad");
-        }
-        $empresa = $this->empresa_model->obtenerEmpresa($usuario);
+    public function Obtenerverempresa(){
+        $rif=$this->input->get('rif');
+        $empresa = $this->empresa_model->obtenerEmpresa($rif);
         if ($empresa != false) {
-            if ($username['login_ok'] == TRUE) {
+           
                 foreach ($empresa->result_array() as $row) {
                     $data[] = array(
                         'id' => $row['id'],
@@ -201,12 +209,100 @@ class Empresa extends CI_Controller {
                         'seleccioncamara2' => $row['selecamara2'],
                         'seleccioncamara3' => $row['selecamara3'],
                         'seleccioncamara4' => $row['selecamara4'],
+                        'seleccioncamara5' => $row['selecamara5'],
                         'cmbseccion' => $row['seccion'],
                         'cmbdivisionact' => $row['divisionact'],
                         'cmbgrupo' => $row['grupoact'],
                         'cmbclase' => $row['claseact'],
+                        'cmbrama' => $row['ramaact'],
                         'total' => 1
                     );
+                }
+            }
+        
+        $output = array(
+            'success' => true,
+            'data' => $data,
+            );
+        echo json_encode($output);
+    }
+
+
+    public function obtenerEmpresa() {
+        $username = $this->session->userdata('datasession');
+        if ($username['login_ok'] == TRUE) {
+            $usuario = $username['usuario'];
+            //$nacionalidad =$username['nacionalidad']; 
+        } else {
+            //$usuario= $this->input->get("cedula");
+            //$nacionalidad= $this->input->get("nacionalidad");
+        }
+        $empresa = $this->empresa_model->obtenerEmpresa($usuario);
+        if ($empresa != false) {
+            if ($username['login_ok'] == TRUE) {
+                foreach ($empresa->result_array() as $row) {
+                    
+                    if( $row['id']!="" &&  $row['id']!=null)  {
+
+
+                            $data[] = array(
+                                'id' => $row['id'],
+                                'rif' => SUBSTR($row['rif2'], 0, 1),
+                                'rif1' => SUBSTR($row['rif2'], 1, strlen($row['rif2']) - 2),
+                                'rif2' => $row['rif2'][strlen($row['rif2']) - 1],
+                                'nombrecomer' => $row['nombreco'],
+                                'anoact' => $row['anoact'],
+                                'registromer' => $row['registromer'],
+                                'razonsoc' => $row['raz2'],
+                                'nacionalidadrep' => $row['nacionalidarep'],
+                                'cedularep' => $row['cedula2'],
+                                'representante' => $row['nombrerep'],
+                                'codmovilrep' => SUBSTR($row['telfrep'], 0, 3),
+                                'movilrep' => SUBSTR($row['telfrep'], 3),
+                                'tipo' => $row['tipo'],
+                                'nombrecont' => $row['nombrecont'],
+                                'codmovilcont' => SUBSTR($row['telfcont'], 0, 3),
+                                'movilcont' => SUBSTR($row['telfcont'], 3),
+                                'nacionalidadcont' => $row['nacionalidadcont'],
+                                'cedulacont' => $row['cedulacont'],
+                                'cmbestado' => $row['estado'],
+                                'cmbmunicipio' => $row['municipio'],
+                                'cmbparroquia' => $row['parroquia'],
+                                'cmbcomunidad' => $row['comunidad'],
+                                'direccion' => $row['direccion'],
+                                'codmovilemp' => SUBSTR($row['tlfmovil'], 0, 3),
+                                'movilemp' => SUBSTR($row['tlfmovil'], 3),
+                                'codfijoemp' => SUBSTR($row['tlflocal'], 0, 3),
+                                'fijoemp' => SUBSTR($row['tlflocal'], 3),
+                                'codfaxemp' => SUBSTR($row['faxemp'], 0, 3),
+                                'faxemp' => SUBSTR($row['faxemp'], 3),
+                                'correoemp' => $row['emailemp'],
+                                'pagwebemp' => $row['pagwebemp'],
+                                'facebookemp' => $row['facebemp'],
+                                'twitteremp' => $row['twitter'],
+                                'seleccioncamara1' => $row['selecamara1'],
+                                'seleccioncamara2' => $row['selecamara2'],
+                                'seleccioncamara3' => $row['selecamara3'],
+                                'seleccioncamara4' => $row['selecamara4'],
+                                'seleccioncamara5' => $row['selecamara5'],
+                                'cmbseccion' => $row['seccion'],
+                                'cmbdivisionact' => $row['divisionact'],
+                                'cmbgrupo' => $row['grupoact'],
+                                'cmbclase' => $row['claseact'],
+                                'cmbrama' => $row['ramaact'],
+                                'total' => 1
+                            );
+                    }else{
+                        $data[] = array(
+                                    'rif' => SUBSTR($row['rif2'], 0, 1),
+                                    'rif1' => SUBSTR($row['rif2'], 1, strlen($row['rif2']) - 2),
+                                    'rif2' => $row['rif2'][strlen($row['rif2']) - 1],
+                                    'razonsoc' => $row['raz2'],
+                                    'nacionalidadrep' => $row['nacionalidad2'],
+                                    'cedularep' => $row['cedula2'],
+                                    'total' => 1
+                                );    
+                    }
                 }
             }
         } else {

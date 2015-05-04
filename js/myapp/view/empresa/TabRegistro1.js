@@ -48,14 +48,17 @@ extend: 'Ext.form.Panel',
                                         store: Ext.create('myapp.store.registrar.Estado'),
                                         queryMode: 'local',
                                         emptyText: 'Seleccionar',
+                                        value:'Lara',
                                         triggerAction: 'all',
                                         allowBlank: false,
+                                        editable: false,
                                         labelWidth: 80
                                 }, {
                                 xtype: 'combobox',
                                         width: '33%',
                                         allowBlank: false,
                                         fieldLabel: '* Municipio',
+                                        
                                         margins: '2 0 8 5',
                                         name: 'cmbmunicipio',
                                         displayField: 'nombre',
@@ -63,6 +66,7 @@ extend: 'Ext.form.Panel',
                                         store: Ext.create('myapp.store.registrar.Municipio'),
                                         queryMode: 'local',
                                         emptyText: 'Seleccionar',
+                                        editable: false,
                                         triggerAction: 'all',
                                         allowBlank: false,
                                         labelWidth: 80
@@ -72,9 +76,11 @@ extend: 'Ext.form.Panel',
                                         width: '33%',
                                         allowBlank: false,
                                         fieldLabel: '* Parroquia',
+                                        disabled    : true,
                                         margins: '2 0 8 5',
                                         name: 'cmbparroquia',
                                         displayField: 'nombre',
+                                        editable: false,
                                         valueField: 'id',
                                         store: Ext.create('myapp.store.registrar.Parroquia'),
                                         queryMode: 'local',
@@ -94,9 +100,11 @@ extend: 'Ext.form.Panel',
                                         width: '33%',
                                         allowBlank: false,
                                         fieldLabel: '* Comunidad',
+                                        disabled    : true,
                                         margins: '2 0 8 5',
                                         name: 'cmbcomunidad',
                                         displayField: 'nombre',
+                                        editable: false,
                                         valueField: 'id',
                                         store: Ext.create('myapp.store.registrar.Comunidad'),
                                         queryMode: 'local',
@@ -132,7 +140,14 @@ extend: 'Ext.form.Panel',
                                         store: Ext.create('myapp.store.registrar.TelefonoCelular'),
                                         displayField: 'codigo',
                                         valueField: 'codigo',
+                                        editable: false,
                                         allowBlank: false,
+                                          listeners: {
+                                                select: function (comp, record, index) {
+                                                        if (comp.getValue() == "" || comp.getValue() == "&nbsp;") 
+                                                        comp.setValue(null);
+                                                }
+                                        },
                                         editable: false
                                 }, {
                                 xtype: 'textfield',
@@ -144,6 +159,7 @@ extend: 'Ext.form.Panel',
                                         minLength: 7,
                                         maxLength: 7,
                                         maskRe: /[0-9]/,
+                                      
                                 }, {
                                 xtype: 'combobox',
                                         width: '13%',
@@ -155,6 +171,13 @@ extend: 'Ext.form.Panel',
                                         displayField: 'codigo',
                                         valueField: 'codigo',
                                         editable: false,
+                                        listeners: {
+
+                                                select: function (comp, record, index) {
+                                                        if (comp.getValue() == "" || comp.getValue() == "&nbsp;") 
+                                                        comp.setValue(null);
+                                                }
+                                        }
                                 }, {
                                 xtype: 'textfield',
                                         //flex        : 1,
@@ -175,6 +198,13 @@ extend: 'Ext.form.Panel',
                                         displayField: 'codigo',
                                         valueField: 'codigo',
                                         editable: false,
+                                        listeners: {
+
+                                                select: function (comp, record, index) {
+                                                        if (comp.getValue() == "" || comp.getValue() == "&nbsp;") 
+                                                        comp.setValue(null);
+                                                }
+                                        }
                                 }, {
                                 xtype: 'textfield',
                                         //flex        : 1,
@@ -230,7 +260,7 @@ extend: 'Ext.form.Panel',
                                         allowBlank: false,
                                 }, {
                                 xtype: 'textfield',
-                                        fieldLabel: 'Twittesadasdr',
+                                        fieldLabel: 'Twitter',
                                         width: '49%',
                                         margins: '5 0 5 7',
                                         labelWidth: 80,

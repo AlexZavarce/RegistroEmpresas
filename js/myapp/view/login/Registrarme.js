@@ -93,7 +93,7 @@ Ext.define('myapp.view.login.Registrarme', {
                         margin: '10 10 10 10',
                         width: '85%',
                         flex: 3,
-                        title: 'Datos del Representante',
+                        title: 'Datos del Representante Legal',
                         items: [{
                                 xtype: 'fieldcontainer',
                                 fieldLabel: 'Cédula',

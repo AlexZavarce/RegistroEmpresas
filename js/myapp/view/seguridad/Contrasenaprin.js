@@ -8,8 +8,8 @@ Ext.define('myapp.view.seguridad.Contrasenaprin', {
    	type: 'fit' // #2
   },
   items: [{
-    win=Ext.create('myapp.view.seguridad.Contrasena');
-    win.show(); 
+    xtype:'contrasena',
+   
   }] 
-  }],
+
 }); 

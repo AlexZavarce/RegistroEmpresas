@@ -21,31 +21,40 @@ Ext.define('myapp.view.reportes.Reportegen', {
     },
     buildItem : function(){
         return [{ 
-            xtype: 'checkboxgroup',
+            xtype: 'radiogroup',
             hideLabel: true,
             align: 'center',
             id:'reportes',
             width:1035,
-            height:1035, 
+            height:1035,
             name:'reportes',
             pack: 'center',
             columns:2,
-            margins:'100 100 100 200',
+            margins:'100 100 100 100',
             items: [{
-                xtype: 'checkboxfield',
+                xtype: 'radiofield',
                 name:'reportegen',
-                boxLabel: 'Empresas Registradas',
+               value:'infpersonal',
+                boxLabel: 'Listado de Empresas Registradas.',
+                inputValue: '1',
+                Widthlabel:300,
+                heightlabel:300,
                 style: 'margin-bottom: 20px',
-                value:'infpersonal',
-                inputValue: '5',
-                id:'5',
+                margins:'20 30 40 30',
+                cheked:false
+            },{
+                xtype: 'radiofield',
+                name:'reportegen',
+                boxLabel: 'Listado de Usuarios Sin Registro de Empresa.',
+               value:'infUsuario',
+                style: 'margin-bottom: 20px',
+                inputValue: '2',
                 labelWidth:1000,
                 labelheight:300,
                 margins:'20 30 40 30',
                 cheked:false
-            }],
+            }]
         }]
     }
 });
-
   

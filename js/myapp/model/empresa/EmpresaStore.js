@@ -10,7 +10,7 @@ Ext.define('myapp.model.empresa.EmpresaStore', {
         {name: 'anoact'},
         {name: 'registromer'},
         {name: 'razonsoc'},
-        {name: 'nacionalidarep', type: 'int'},
+        {name: 'nacionalidadrep'},
         {name: 'cedularep'},
         {name: 'representante'},
         {name: 'codmovilrep'},
@@ -40,10 +40,12 @@ Ext.define('myapp.model.empresa.EmpresaStore', {
         {name: 'seleccioncamara2'},
         {name: 'seleccioncamara3'},
         {name: 'seleccioncamara4'},
+         {name: 'seleccioncamara5'},
         {name: 'cmbseccion'},
         {name: 'cmbdivisionact', type: 'int'},
         {name: 'cmbgrupo', type: 'int'},
         {name: 'cmbclase', type: 'int'},
+         {name: 'cmbrama', type: 'int'},
         {name: 'total'}
     ]
 });

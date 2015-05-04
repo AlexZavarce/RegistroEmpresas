@@ -1,11 +1,12 @@
 Ext.define('myapp.controller.seguridad.Contrasena', {
   extend: 'Ext.app.Controller',
   views: [
-    'seguridad.Contrasena'
+    'seguridad.Contrasena',
+    'seguridad.Contrasenaprin'
   ],
   refs:[{
-     ref: 'contrasenaForm',
-     selector: '#contrasenawindow #contrasenaform'
+     ref: 'contrasena',
+     selector: 'contrasena'
   }],
   requires: [
     'myapp.util.Util' ,
@@ -46,7 +47,7 @@ Ext.define('myapp.controller.seguridad.Contrasena', {
     confcontrasena = formPanel.down('textfield[name=confcontrasena]').getValue();         // #5
     if (formPanel.getForm().isValid()) { 
       console.log('valor');
-      //confcontrasena = myapp.util.Md5.encode(confcontrasena);
+      confcontrasena = myapp.util.Md5.encode(confcontrasena);
       console.log(confcontrasena);
       Ext.Ajax.request({ 
         url: BASE_URL + 'seguridad/usuario/updatecontrasena',
@@ -85,7 +86,8 @@ Ext.define('myapp.controller.seguridad.Contrasena', {
     formPanel1.down('button[name=guardar]').enable(true);
   },
   onTextfieldSpecialKey: function(field, e, options) {
-    if (e.getKey() == e.ENTER || e.getKey() == e.TAB){
+    console.log('hola');
+    if (e.getKey() ==e.ENTER || e.getKey() ==e.TAB){
       var win = field.up('window'),
       formPanel = win.down('form'),
       formPanel1= win.down('toolbar'),
@@ -105,6 +107,7 @@ Ext.define('myapp.controller.seguridad.Contrasena', {
             formPanel.down('textfield[name=pass]').disable(true);
             formPanel.down('textfield[name=confcontrasena]').disable(true);
             formPanel1.down('button[name=guardar]').disable(true);
+            document.location= BASE_URL+'login/login/logout';
           } else{
             formPanel.down('textfield[name=pass]').enable(true);
             formPanel.down('textfield[name=confcontrasena]').enable(true);

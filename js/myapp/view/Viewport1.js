@@ -19,12 +19,6 @@ Ext.define('myapp.view.Viewport1', {
   },
   buildItem : function(){
     return [{
-      xtype: 'mainmenu',
-      width: '8%',
-      collapsible: true,
-      region: 'west',
-      'text':'Base',
-    },{
       xtype: 'appheader',
       width: '100%',
       height: '15%',  

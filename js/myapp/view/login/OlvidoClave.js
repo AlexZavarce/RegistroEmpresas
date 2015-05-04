@@ -2,12 +2,13 @@ Ext.define('myapp.view.login.OlvidoClave', {
     extend: 'Ext.window.Window',
     alias: 'widget.olvidoclave',
     layout: 'fit',
-    closable: true,
+    closable: false,
     title: "Olvido Contraseña ",
+    requires: ['myapp.util.Util', 'myapp.vtypes.Validadores'],
     // autoShow: true,
     // autoRender: true,
-    height: 320,
-    width: 440,
+    height: "37%",
+    width: "35%",
     initComponent: function () {
         var me = this;
         me.items = me.buildItems();
@@ -23,7 +24,6 @@ Ext.define('myapp.view.login.OlvidoClave', {
                     pack: 'center',
                     type: 'vbox'
                 },
-
                 items: [{
                         xtype: 'container',
                         layout: 'vbox',
@@ -32,74 +32,69 @@ Ext.define('myapp.view.login.OlvidoClave', {
                         flex: 2,
                         title: '',
                         items: [{
-                             margin: '10 10 0 40',
-                            xtype: 'image',
-                            src: BASE_PATH + './imagen/logo/laraprogresista1.png',
-                            height: 80,
-                            width: 250,
-                        }, {
-                            xtype: 'textfield',
-                            fieldLabel: 'RIF',
-                             labelWidth: 55,
-                            name: 'rif',
-                            margins: '10 5 5 30',
-                            hiddenLabel: true,
-                            emptyText: 'Introduzca el RIF sin espacios',
-                            maxLength: 25,
-                            width: 285,
-                            //labelWidth: 85,
-                            allowBlank: false
-                        }]
-                },
-                        {
-                            xtype: 'fieldset',
-                            id: 'contenedorNotificacionEscribir',
-                            layout: 'vbox',
-                            margin: '10 10 10 10',
-                            width: '85%',
-                            flex: 1,
-                            title: '',
-                            items: [{
+                                margin: '10 10 0 40',
+                                xtype: 'image',
+                                src: BASE_PATH + './imagen/logo/laraprogresista1.png',
+                                height: 80,
+                                width: 250,
+                            }, {
+                                xtype: 'textfield',
+                                fieldLabel: 'RIF',
+                                labelWidth: 55,
+                                name: 'rif',
+                                margins: '10 5 5 30',
+                                hiddenLabel: true,
+                                emptyText: 'Introduzca el RIF sin espacios',
+                                maxLength: 25,
+                                width: 285,
+                                //labelWidth: 85,
+                                allowBlank: false
+                            }]
+                    },
+                    {
+                        xtype: 'fieldset',
+                        id: 'contenedorNotificacionEscribir',
+                        layout: 'vbox',
+                        margin: '10 10 10 10',
+                        width: '85%',
+                        flex: 1,
+                        title: '',
+                        items: [{
                                 xtype: 'label',
                                 width: '100%',
                                 name: 'Notificacion',
                                 id: 'notificacionEscribir',
                                 margins: '10 5 5 0',
                                 hiddenLabel: true,
-
-                                text:'Si presenta inconvenientes con el servicio por favor escribir al correo (correo) o Numero: (Numero)'
+                                text: 'Si presenta inconvenientes con el servicio por favor escribir al correo (correo) o Numero: (Numero)'
 
                             }]
-                        }
+                    }
 
 
 
                 ]
 
-        }];
+            }];
     },
-    dockedItems: [{
+     dockedItems: [{
             xtype: 'toolbar',
             dock: 'bottom',
             height: 40,
             width: '100%',
-            items: [
-                {
+            items: [{
                     xtype: 'tbfill'
-                }, 
-                {
+                }, {
                     xtype: 'button',
                     itemId: 'cancel',
                     iconCls: 'cancel',
                     name: 'salir',
                     text: 'Cancelar'
-                }, 
-                {
+                }, {
                     xtype: 'button',
-                    name: 'save',
+                    name: 'enviar',
                     iconCls: 'go',
-                    text: "Aceptar"
-                }
-            ]
+                    text: "Aceptar",
+                }]
     }]
 });

@@ -1,3 +1,4 @@
+
 Ext.define('myapp.view.empresa.TabRegistro3', {
     extend: 'Ext.form.Panel',
     alias: 'widget.tabregistro3',
@@ -54,6 +55,7 @@ Ext.define('myapp.view.empresa.TabRegistro3', {
                                                         store: Ext.create('myapp.store.Nacionalidad'),
                                                         queryMode: 'local',
                                                         emptyText: 'Seleccionar',
+                                                        editable: false,
                                                         triggerAction: 'all',
                                                         labelWidth: 80
                                                     },
@@ -76,17 +78,24 @@ Ext.define('myapp.view.empresa.TabRegistro3', {
                                                     }, {
                                                         xtype: 'combobox',
                                                         width: '15%',
-                                                        allowBlank: false,
+                                                        //allowBlank: false,
                                                         fieldLabel: 'Tlf. Celular',
                                                         margins: '10 5 5 0',
                                                         name: 'codmovilrep',
-                                                        displayField: 'nombre',
-                                                        valueField: 'id',
+                                                        displayField: 'codigo',
+                                                        valueField: 'codigo',
                                                         store: Ext.create('myapp.store.registrar.TelefonoCelular'),
                                                         queryMode: 'local',
                                                         emptyText: 'Seleccionar',
+                                                        editable: false,
                                                         triggerAction: 'all',
                                                         labelWidth: 80,
+                                                        listeners: {
+                                                            select: function (comp, record, index) {
+                                                                    if (comp.getValue() == "" || comp.getValue() == "&nbsp;") 
+                                                                    comp.setValue(null);
+                                                            }
+                                                        }
                                                     }, {
                                                         xtype: 'textfield',
                                                         //flex        : 1,
@@ -108,7 +117,7 @@ Ext.define('myapp.view.empresa.TabRegistro3', {
                         margin: '10 10 10 10',
                         width: '100%',
                         style: 'padding:10px',
-                        title: 'Datos del Contacto',
+                        title: 'Persona de Contacto',
                         items: [{
                                 xtype: 'container',
                                 layout: 'hbox',
@@ -129,6 +138,7 @@ Ext.define('myapp.view.empresa.TabRegistro3', {
                                                 store: Ext.create('myapp.store.Nacionalidad'),
                                                 queryMode: 'local',
                                                 emptyText: 'Seleccionar',
+                                                editable: false,
                                                 triggerAction: 'all',
                                                 labelWidth: 80
                                             }, {
@@ -159,7 +169,13 @@ Ext.define('myapp.view.empresa.TabRegistro3', {
                                                 store: Ext.create('myapp.store.registrar.TelefonoCelular'),
                                                 displayField: 'codigo',
                                                 valueField: 'codigo',
-                                                editable: false
+                                                editable: false,
+                                                listeners: {
+                                                    select: function (comp, record, index) {
+                                                            if (comp.getValue() == "" || comp.getValue() == "&nbsp;") 
+                                                            comp.setValue(null);
+                                                    }
+                                                }
                                             }, {
                                                 xtype: 'textfield',
                                                 

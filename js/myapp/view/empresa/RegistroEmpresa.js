@@ -53,9 +53,10 @@ Ext.define('myapp.view.empresa.RegistroEmpresa', {
                                         margins: '0 5 5 0',
                                         labelWidth: 60,
                                         width: '10%',
-                                        store: Ext.create('myapp.store.Nacionalidad'),
+                                        store: Ext.create('myapp.store.seguridad.Rif'),
                                         valueField: 'nombre',
                                         displayField: 'nombre',
+                                         editable: false,
                                         allowBlank: false
                                     }, {
                                         xtype: 'textfield',
@@ -64,7 +65,7 @@ Ext.define('myapp.view.empresa.RegistroEmpresa', {
                                         maskRe: /[0-9]/,
                                         name: 'rif1',
                                         width: '15.8%',
-                                        minLength: 6,
+                                        minLength: 8,
                                         maxLength: 8,
                                         allowBlank: false
                                     }, {
@@ -89,9 +90,10 @@ Ext.define('myapp.view.empresa.RegistroEmpresa', {
                                         xtype: 'textfield',
                                         name: 'anoact',
                                         width: '15%',
+                                        allowBlank: false,
                                         maskRe: /[0-9]/,
                                         margins: '0 5 5 0',
-                                        fieldLabel: 'Años en Actividad',
+                                        fieldLabel: '* Años en Actividad',
                                         labelWidth: 60,
                                     }],
                             }, {
@@ -108,7 +110,8 @@ Ext.define('myapp.view.empresa.RegistroEmpresa', {
                                         width: '30%',
                                         fieldLabel: '* Registro Mercantil',
                                         allowBlank: false,
-                                        labelWidth: 60,
+                                         editable: false,
+                                        labelWidth: 80,
                                     }, {
                                         xtype: 'textarea',
                                         name: 'nombrecomer',
@@ -199,12 +202,12 @@ Ext.define('myapp.view.empresa.RegistroEmpresa', {
                     name: 'btncatalogo',
                     text: 'Ver Empresas',
                     iconCls: 'listado'
-                }, {
+                }, /*{
                     xtype: 'button',
                     iconCls: 'icon-limpiar',
                     name: 'limpiar',
                     text: 'Limpiar'
-                }, {
+                }, */{
                     xtype: 'button',
                     iconCls: 'save',
                     name: 'guardar',

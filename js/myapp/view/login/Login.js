@@ -32,7 +32,7 @@ Ext.define('myapp.view.login.Login', {
                 labelWidth: 80,
                 allowBlank: false,
                 vtype: 'alphanum',
-                minLength: 3,
+                minLength: 6,
                 msgTarget: 'under'
             },
             dockedItems: [{
@@ -108,6 +108,24 @@ Ext.define('myapp.view.login.Login', {
                     enableKeyEvents: true,
                     width: 285,
                     id: 'password'
-                }]
+                }, {
+                        xtype: 'fieldset',
+                        id: 'contenedorNotificacionEscribir',
+                        layout: 'vbox',
+                        margin: '10 10 10 10',
+                        width: '85%',
+                        flex: 1,
+                        title: '',
+                        items: [{
+                                xtype: 'label',
+                                width: '100%',
+                                name: 'Notificacion',
+                                id: 'notificacionEscribir',
+                                margins: '10 5 5 0',
+                                hiddenLabel: true,
+                                text: 'Si presenta inconvenientes con el servicio por favor escribir al correo (correo) o Numero: (Numero)'
+
+                            }]
+                    }]
         }]
 });

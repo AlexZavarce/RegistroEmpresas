@@ -6,12 +6,12 @@ class Comunidad_model extends CI_Model {
     $this->load->database();
   }
   public function obtenerComunidad($parroquia){
-    $this->db->order_by("nombre", "asc");     
+    $this->db->order_by("id", "asc");     
       return $consulta = $this->db->get_where('comunidad',array('parroquia' => $parroquia));    
     }
     
   public function obtenerComunidadSola(){ 
-    $this->db->order_by("nombre", "asc");     
+    $this->db->order_by("id", "asc");     
     return $consulta = $this->db->get_where('comunidad');    
   } 
 

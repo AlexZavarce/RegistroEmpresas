@@ -4,8 +4,8 @@ class Infpersonal_model extends CI_Model
 	function __construct(){
 		parent::__construct();
 	}
-	public function getinfpersonal($rifs,$nombrecomer,$anoact,$cmbmunicipio,$cmbparroquia,$cmbcomunidad,$cmbtipo,$cmbseccion,$cmbdivision,$cmbgrupo,$cmbclase){
-		$query = $this->db->query("SELECT empresa.rif as rif,empresa.nombreco as nombreco, empresa.cedularep as cedularep,empresa.nombrerep as nombrerep,municipio.nombre as municipio, parroquia.nombre as parroquia,comunidad.nombre as comunidad,seccion.nombre as seccion, IF(empresa.tipo='0' ,'Servicio', IF(empresa.tipo='1' ,'Produccion', IF(empresa.tipo='2' ,'Ambos', ' ')))as tipo FROM empresa,municipio,parroquia,comunidad,seccion
+	public function getinfpersonal($rifs,$nombrecomer,$anoact,$cmbmunicipio,$cmbparroquia,$cmbcomunidad,$cmbtipo,$cmbseccion,$cmbdivision,$cmbgrupo,$cmbclase,$cmbrama){
+		$query = $this->db->query("SELECT empresa.rif as rif,claseact.nombre as claseact,grupoact.nombre as grupoact,divisionact.nombre as divisionact,empresa.nombreco as nombreco, empresa.cedularep as cedularep,empresa.nombrerep as nombrerep,municipio.nombre as municipio, parroquia.nombre as parroquia,comunidad.nombre as comunidad,seccion.nombre as seccion, IF(empresa.tipo='0' ,'Servicio', IF(empresa.tipo='1' ,'Produccion', IF(empresa.tipo='2' ,'Ambos', ' ')))as tipo, ramaact.nombre as ramaact FROM empresa,municipio,parroquia,comunidad,seccion,ramaact,divisionact,claseact,grupoact
         WHERE empresa.rif $rifs
         AND empresa.municipio=municipio.id 
         AND empresa.parroquia=parroquia.id 
@@ -13,8 +13,18 @@ class Infpersonal_model extends CI_Model
         AND empresa.parroquia=parroquia.id
         AND empresa.comunidad=comunidad.id
         AND empresa.seccion=seccion.id
-        AND empresa.comunidad=comunidad.id
-        AND empresa.seccion=seccion.id 
+     
+        AND empresa.ramaact=ramaact.id 
+        AND empresa.claseact=claseact.id 
+        AND empresa.grupoact=grupoact.id 
+        AND empresa.divisionact=divisionact.id 
+        
+     
+        AND empresa.ramaact=ramaact.id 
+        AND empresa.claseact=claseact.id 
+        AND empresa.grupoact=grupoact.id 
+        AND empresa.divisionact=divisionact.id 
+
         AND empresa.nombreco $nombrecomer 
         AND empresa.municipio $cmbmunicipio
         AND empresa.parroquia $cmbparroquia 
@@ -23,7 +33,10 @@ class Infpersonal_model extends CI_Model
         AND empresa.seccion $cmbseccion
         AND empresa.divisionact $cmbdivision
         AND empresa.grupoact $cmbgrupo
-        AND empresa.claseact $cmbclase");
+        AND empresa.claseact $cmbclase
+        AND empresa.ramaact $cmbrama");
+         
+         
   	    return $query;
 	}
 }

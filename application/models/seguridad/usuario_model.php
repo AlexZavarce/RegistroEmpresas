@@ -28,10 +28,34 @@
       $query->free-result();
     } 
   } 
-  function updateusuariolinea($cedula){
-    $query = $this->db->query("UPDATE usuariolinea SET status=1 where cedula=$cedula");
+   function cargarusuario2($cedula,$nacionalidad) {
+    $query = $this->db->query("SELECT a.id,a.usuario,a.password,a.tipousuario, a.cedula,a.nacionalidad,IF(a.status='1', 'Activo', 'Inactivo') as status, b.nombre as ntipousuario,c.nombre,c.apellido,c.direccion,c.correo as correo FROM usuario a,tipousuario b,persona c,division e WHERE a.tipousuario=b.id AND a.cedula=c.cedula AND a.nacionalidad=c.nacionalidad group by a.id
+     
+      
+  ");
+    $resultado = array();
+    $resultdb=array();  
+    if ($query->num_rows() > 0){
+      foreach ($query->result() as $row)
+      {
+        $resultado[] = $row;
+      }
+      return $resultado;
+      $query->free-result();
+    } 
+  } 
+  function updateusuariolinea($usuario){
+    $query = $this->db->query("UPDATE usuariolinea SET status=1 where rif='$usuario'");
   }
-  
+  function existepersona($cedula,$nacionalidad){
+   $query =$this->db->query("SELECT * FROM persona where cedula ='$cedula' and nacionalidad='$nacionalidad'");
+    if ($query->num_rows() > 0){
+      $tipo = $query;
+    }else{
+       $tipo = '';
+    }
+    return $tipo;
+  }
   function cargarusuariodiv($cedula,$nacionalidad) {
     $query = $this->db->query("SELECT a.id,a.usuario,a.password,a.tipousuario,d.foto as foto,
       a.cedula,a.nacionalidad,IF(a.status='1', 'Activo', 'Inactivo') as status,
@@ -47,6 +71,26 @@
       AND a.nacionalidad=d.nacionalidad
       AND d.cedula=c.cedula 
       AND d.nacionalidad=c.nacionalidad");
+    $resultado = array();
+    $resultdb=array();  
+    if ($query->num_rows() > 0){
+      foreach ($query->result() as $row)
+      {
+        $resultado[] = $row;
+      }
+      return $resultado;
+      $query->free-result();
+    } 
+  } 
+   function cargarusuariodiv2($cedula,$nacionalidad) {
+    $query = $this->db->query("2SELECT a.id,a.usuario,a.password,a.tipousuario,d.foto as foto,
+      a.cedula,a.nacionalidad,IF(a.status='1', 'Activo', 'Inactivo') as status,
+      b.nombre as ntipousuario,c.nombre,c.apellido,c.direccion,c.correo as correo 
+      FROM usuario a,tipousuario b,persona c,empleado d,division e
+      WHERE a.tipousuario=b.id 
+     
+     
+     ");
     $resultado = array();
     $resultdb=array();  
     if ($query->num_rows() > 0){
@@ -130,6 +174,26 @@
     $this->db->where('nacionalidad', $datacontrasena['nacionalidad']); 
     return $this->db->update('usuario');
   }
+  
+  function verificarPersona($cedula,$nacionalidad){
+   $query =$this->db->query("SELECT * FROM persona where cedula ='$cedula' ");
+    if ($query->num_rows() > 0){
+      $tipo = $query;
+    }else{
+       $tipo = '';
+    }
+    return $tipo;
+  }
+
+  function verificarcorreo($correo){
+    $query =$this->db->query("SELECT * FROM usuariolinea where correo ='$correo' ");
+    if ($query->num_rows() > 0){
+      $tipo = $query;
+    }else{
+       $tipo = '';
+    }
+    return $tipo;
+   }
 }
 
 

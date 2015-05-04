@@ -27,12 +27,9 @@ Ext.define('myapp.controller.login.Registrarme', {// #1
                 });
             },
     onButtonClickSave: function (button, e, options) {
-
-        console.log('hola');
-        me = this;
         var formulario = button.up('registrarme');
         if (recaptcha.getResponse() != '') {
-            var formPanel = button.up('registrarme');
+            
             login = button.up('registrarme');
             url = BASE_URL + 'login/registrarme/guardarusuariolinea';
 
@@ -43,63 +40,101 @@ Ext.define('myapp.controller.login.Registrarme', {// #1
             nacionalidad = formulario.down('combobox[name=nacionalidad]').getRawValue();
             cedula = formulario.down('textfield[name=cedula]').getValue();
             correo = formulario.down('textfield[name=correo]').getValue();
-            console.log(nacionalidad);
-            // if (formPanel.getForm().isValid()) { 
-            // Ext.get(login.getEl()).mask("Guardando... Se enviara un correo eelctronico...",'loading');
-            Ext.Ajax.request({
-                url: BASE_URL + 'login/registrarme/guardarusuariolinea',
-                method: 'POST',
-                params: {
-                    rif: rif,
-                    rif1: rif1,
-                    rif2: rif2,
-                    nacionalidad: nacionalidad,
-                    cedula: cedula,
-                    correo: correo,
-                    razonsocial: razonsocial,
-                    recaptcha_challenge_field: recaptcha.getChallenge(),
-                    recaptcha_response_field: recaptcha.getResponse()
-                },
-                failure: function (conn, response, options, eOpts) {
-                    Ext.get(login.getEl()).unmask();
-                    Ext.Msg.show({
-                        title: 'Fallo!',
-                        msg: result.msg,
-                        icon: Ext.Msg.ERROR,
-                        buttons: Ext.Msg.OK
-                    });
-                },
-                success: function (conn, response, options, eOpts) {
-                    var datos = Ext.JSON.decode(conn.responseText, true);
-                    console.log(datos);
-                    if (datos.success) {
-                        Ext.Msg.alert('Informaci&oacute;n', datos.msg, function (btn) { //Step 2
-                            if (btn === 'ok' || btn === 'cancel') {
-                                formulario.getForm().reset();
-                                formulario.close();
-                                formulario.destroy();
-                                document.location = BASE_URL + '../';
+
+            if (rif.length != 0 && rif1.length != 0 && razonsocial.length != 0 && nacionalidad.length != 0 && cedula.length != 0 && correo.length != 0) {
+                if (rif1.length == 8 && rif2.length == 1) {
+                    if (cedula.length <= 8 && cedula.length >= 5) {
+
+                        var myMask = new Ext.LoadMask(Ext.getBody(), {msg: "Por favor espere..."});
+                        myMask.show();
+                        // Ext.get(login.getEl()).mask("Guardando... Se enviara un correo eelctronico...",'loading');
+                        Ext.Ajax.request({
+                            url: BASE_URL + 'login/registrarme/guardarusuariolinea',
+                            method: 'POST',
+                            params: {
+                                rif: rif,
+                                rif1: rif1,
+                                rif2: rif2,
+                                nacionalidad: nacionalidad,
+                                cedula: cedula,
+                                correo: correo,
+                                razonsocial: razonsocial,
+                                recaptcha_challenge_field: recaptcha.getChallenge(),
+                                recaptcha_response_field: recaptcha.getResponse()
+                            },
+                            failure: function (conn, response, options, eOpts) {
+                                Ext.get(login.getEl()).unmask();
+                                myMask.hide();
+                                Ext.Msg.show({
+                                    title: 'Fallo!',
+                                    msg: result.msg,
+                                    icon: Ext.Msg.ERROR,
+                                    buttons: Ext.Msg.OK
+                                });
+                            },
+                            success: function (conn, response, options, eOpts) {
+                                var datos = Ext.JSON.decode(conn.responseText, true);
+                                myMask.hide();
+                                if (datos.success) {
+                                    myMask.hide();
+                                   
+                                    
+                                    Ext.Msg.alert('Informaci&oacute;n', datos.msg, function (btn) { //Step 2
+                                        if (btn === 'ok' || btn === 'cancel') {
+                                            formulario.close();
+                                            formulario.destroy();
+                                            document.location = BASE_URL + '../';
+                                        }
+                                    });
+                                }
+                                else {
+                                    Ext.Msg.show({
+                                        title: 'Error!',
+                                        msg: datos.msg,
+                                        icon: Ext.Msg.ERROR,
+                                        buttons: Ext.Msg.OK});//Ext.MessageBox.show({ title: 'Informaci&oacute;n', msg: 'Los datos suministrados no son correctos', buttons: Ext.MessageBox.OK, icon: Ext.MessageBox.INFO });
+                                }
                             }
                         });
+
                     }
+
                     else {
                         Ext.Msg.show({
                             title: 'Error!',
-                            msg: 'Los datos suministrados no son correctos',
+                            msg: 'La Cedula debe tener entre 5 y 8 Digitos',
                             icon: Ext.Msg.ERROR,
-                            buttons: Ext.Msg.OK});//Ext.MessageBox.show({ title: 'Informaci&oacute;n', msg: 'Los datos suministrados no son correctos', buttons: Ext.MessageBox.OK, icon: Ext.MessageBox.INFO });
+                            buttons: Ext.Msg.OK
+                        });//Ext.MessageBox.show({ title: 'Informaci&oacute;n', msg: 'Los datos suministrados no son correctos', buttons: Ext.MessageBox.OK, icon: Ext.MessageBox.INFO });
                     }
                 }
-            });
+                else {
+                    Ext.Msg.show({
+                        title: 'Error!',
+                        msg: 'La longitud de su rif no es correcta ',
+                        icon: Ext.Msg.ERROR,
+                        buttons: Ext.Msg.OK
+                    });//Ext.MessageBox.show({ title: 'Informaci&oacute;n', msg: 'Los datos suministrados no son correctos', buttons: Ext.MessageBox.OK, icon: Ext.MessageBox.INFO });
 
+                }
+            } else {
+                Ext.Msg.show({
+                    title: 'Error!',
+                    msg: 'Debe Ingresar Todos los campos ',
+                    icon: Ext.Msg.ERROR,
+                    buttons: Ext.Msg.OK
+                });//Ext.MessageBox.show({ title: 'Informaci&oacute;n', msg: 'Los datos suministrados no son correctos', buttons: Ext.MessageBox.OK, icon: Ext.MessageBox.INFO });
 
-        } else {
+            }
+        }
+        else {
             Ext.Msg.show({
                 title: 'Error!',
-                msg: 'Los datos suministrados no son correctos',
+                msg: 'Debe Ingresar el Captcha ',
                 icon: Ext.Msg.ERROR,
                 buttons: Ext.Msg.OK
             });//Ext.MessageBox.show({ title: 'Informaci&oacute;n', msg: 'Los datos suministrados no son correctos', buttons: Ext.MessageBox.OK, icon: Ext.MessageBox.INFO });
+
         }
 
     },

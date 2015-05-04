@@ -3,6 +3,7 @@ Ext.define('myapp.store.registrar.TelefonoCelular', {
     autoLoad: true, 
     fields: ['codigo'],
     data: [
+    	{codigo:'&nbsp;'}, 
 		{codigo:'412'}, 
 		{codigo:'414'},
 		{codigo:'424'},

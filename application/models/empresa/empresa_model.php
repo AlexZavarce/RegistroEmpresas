@@ -27,12 +27,24 @@ class Empresa_model extends CI_Model {
     }
 
     public function obtenerEmpresa($usuario) {
-        $sql = "SELECT * FROM empresa WHERE empresa.rif=? ";
+        $sql = "SELECT ul.rif as rif2, ul.razonsocial as raz2, ul.cedula as cedula2,ul.nacionalidad as nacionalidad2, empresa.* FROM usuariolinea as ul left join empresa on empresa.rif=ul.rif WHERE ul.rif=?";
         $consulta = $this->db->query($sql, array($usuario));
-        if ($consulta->num_rows() == 1) {
+        if ($consulta->num_rows() > 0) {
             return $consulta;
         } else {
             return false;
+        }
+    }
+     public function Obtenerempresagrid() {
+      $query = $this->db->query("SELECT * FROM empresa");
+        $resultado = array();
+        $resultdb = array();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $resultado[] = $row;
+            }
+            return $resultado;
+            $query->free - result();
         }
     }
 

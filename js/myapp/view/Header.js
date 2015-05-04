@@ -3,6 +3,7 @@ Ext.define('myapp.view.Header', {
   alias: 'widget.appheader',
   height: 200,
   ui: 'footer',
+  baseCls:'price',
   items: [{
         xtype: 'image', 
         src:BASE_PATH+'./imagen/logo/logoborde1.png',                          
@@ -11,22 +12,14 @@ Ext.define('myapp.view.Header', {
         width:250,
     },{    
         xtype: 'tbseparator'
-    },{
-        xtype: 'image',  
-        //src: 'http://localhost/Ceapdis/Imagen/logo/banner3.png',                         
-        height:110,
-        width:530,
-        margins:'0 0 0 70'
+    },,{
+        xtype: 'label',
+        text: 'SISTEMA DE REGISTRO DE EMPRESAS POR ACTIVIDAD ECONÓMICA DEL ESTADO LARA',
+        width: 600,
+        margins:'0 80 0 120',
+        baseCls:'Three-Dee'
     },{    
         xtype: 'tbseparator'
-    },{ 
-        xtype: 'tbfill'
-    },{
-        xtype: 'image',                           
-        //src: 'http://localhost/Ceapdis/Imagen/logo/logoceapdis.png' ,
-        height:80,
-        width:140,
-        margins:'0 50 0 0'
     },{   
         xtype: 'button',
         text: 'Perfil usuario',  
